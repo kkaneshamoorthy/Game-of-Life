@@ -33,36 +33,12 @@ public class GameStateImpl implements GameState {
     }
 
     /***
-     * Should an Alive cell (row, col) live
-     * @param row
-     * @param col
-     * @return
-     */
-    public boolean shouldAliveCellLive(int row, int col) {
-        int numOfliveNeighbours = countAliveNeighbours(row, col);
-
-        return (this.isCellAliveAt(row, col) && (numOfliveNeighbours == 2 || numOfliveNeighbours == 3));
-    }
-
-    /***
-     * Should a dead cell(row, col) be revived
-     * @param row
-     * @param col
-     * @return
-     */
-    public boolean shouldDeadCellLive(int row, int col) {
-        int numOfliveNeighbours = countAliveNeighbours(row, col);
-
-        return (!this.isCellAliveAt(row, col) && numOfliveNeighbours == 3);
-    }
-
-    /***
      * Count the number of alive neighbours
      * @param row
      * @param col
      * @return
      */
-    public int countAliveNeighbours(int row, int col) {
+    public int getNumOfAliveNeighbours(int row, int col) {
         //Calculating the 8 neighbours (row, col) =>  (x,y)
         // ------------------------------
         // | x-1,y-1 | x-1,y | x-1,y+1 |
@@ -110,7 +86,7 @@ public class GameStateImpl implements GameState {
      * @param col
      * @param isAlive
      */
-    public void setData(int row, int col, boolean isAlive) {
+    public void setCellStatus(int row, int col, boolean isAlive) {
         if (this.grid[row][col] == null) {
             this.grid[row][col] = new CellImpl(row, col, isAlive);
             return;

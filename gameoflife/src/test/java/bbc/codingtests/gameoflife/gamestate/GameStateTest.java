@@ -34,6 +34,6 @@ public class GameStateTest {
     public void testNighbourCount() {
         String input = ".*.\n...\n...";
         GameStateImpl testState = new GameStateImpl(input);
-        assertEquals("The output should equal to the input", 1, testState.countAliveNeighbours(0, 0));
+        assertEquals("The output should equal to the input", 1, testState.getNumOfAliveNeighbours(0, 0));
     }
 }

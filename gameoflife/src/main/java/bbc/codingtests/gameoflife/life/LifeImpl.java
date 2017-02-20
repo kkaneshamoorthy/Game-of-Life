@@ -2,7 +2,6 @@ package bbc.codingtests.gameoflife.life;
 
 import bbc.codingtests.gameoflife.gamestate.GameState;
 import bbc.codingtests.gameoflife.gamestate.GameStateImpl;
-import bbc.codingtests.gameoflife.life.Life;
 
 public class LifeImpl implements Life
 {
@@ -12,36 +11,47 @@ public class LifeImpl implements Life
 	 * @return
 	 */
 	public GameState evolve(GameState currentState) {
-		//Assumption: In the future there maybe different implementation of GameState
-		//Assumption: the GameState interface can not be modified
 		if (currentState == null)
 			return currentState;
-		else if (currentState instanceof GameStateImpl)
-			return evolve((GameStateImpl) currentState);
-		else
-			throw new UnsupportedOperationException("Provide an implementation for the given GameState type");
-	}
 
-	/***
-	 * Evolve implementation for GameStateImpl
-	 * @param currentGameState
-	 * @return
-	 */
-	private GameState evolve(GameStateImpl currentGameState) {
-		GameStateImpl nextGameState = new GameStateImpl(currentGameState.getRows(), currentGameState.getCols());
+		GameState nextGameState = new GameStateImpl(currentState.getRows(), currentState.getCols());
 
-		for (int i=0; i<currentGameState.getRows(); i++) {
-			for (int j=0; j<currentGameState.getCols(); j++) {
-				if (currentGameState.shouldAliveCellLive(i, j))
-					nextGameState.setData(i, j, true);
+		for (int i=0; i<currentState.getRows(); i++) {
+			for (int j=0; j<currentState.getCols(); j++) {
+				if (shouldAliveCellLive(currentState, i, j))
+					nextGameState.setCellStatus(i, j, true);
 				else
-					nextGameState.setData(i, j, false);
+					nextGameState.setCellStatus(i, j, false);
 
-				if (currentGameState.shouldDeadCellLive(i ,j))
-					nextGameState.setData(i, j, true);
+				if (shouldDeadCellLive(currentState, i ,j))
+					nextGameState.setCellStatus(i, j, true);
 			}
 		}
 
 		return nextGameState;
+	}
+
+	/***
+	 * Should an Alive cell (row, col) live
+	 * @param row
+	 * @param col
+	 * @return
+	 */
+	private boolean shouldAliveCellLive(GameState gameState, int row, int col) {
+		int numOfliveNeighbours = gameState.getNumOfAliveNeighbours(row, col);
+
+		return (gameState.isCellAliveAt(row, col) && (numOfliveNeighbours == 2 || numOfliveNeighbours == 3));
+	}
+
+	/***
+	 * Should a dead cell(row, col) be revived
+	 * @param row
+	 * @param col
+	 * @return
+	 */
+	private boolean shouldDeadCellLive(GameState gameState, int row, int col) {
+		int numOfliveNeighbours = gameState.getNumOfAliveNeighbours(row, col);
+
+		return (!gameState.isCellAliveAt(row, col) && numOfliveNeighbours == 3);
 	}
 }
