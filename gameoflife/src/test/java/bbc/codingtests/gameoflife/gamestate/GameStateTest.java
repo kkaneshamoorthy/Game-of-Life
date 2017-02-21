@@ -10,8 +10,8 @@ public class GameStateTest {
     public void testParsing() {
         String input = ".*.\n*.*\n...";
         GameState testState = new GameStateImpl(input);
-        assertTrue("Row 0, col 1 should be alive",testState.isCellAliveAt(0,1));
-        assertFalse("Row 2, col 2 should not be alive",testState.isCellAliveAt(2,2));
+        assertTrue("Row 0, col 1 should be alive", testState.isCellAliveAt(0, 1));
+        assertFalse("Row 2, col 2 should not be alive", testState.isCellAliveAt(2, 2));
     }
 
     @Test

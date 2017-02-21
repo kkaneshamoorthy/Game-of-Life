@@ -1,2 +1,4 @@
 /home/kowrishankar/Downloads/gameoflife_andrei/gameoflife/java/gameoflife/src/test/java/bbc/codingtests/gameoflife/gamestate/GameStateTest.java
-/home/kowrishankar/Downloads/gameoflife_andrei/gameoflife/java/gameoflife/src/test/java/bbc/codingtests/gameoflife/LifeTest.java
+/home/kowrishankar/Downloads/gameoflife_andrei/gameoflife/java/gameoflife/src/test/java/bbc/codingtests/gameoflife/gamestate/ParameterizedLifeTest.java
+/home/kowrishankar/Downloads/gameoflife_andrei/gameoflife/java/gameoflife/src/test/java/bbc/codingtests/gameoflife/cell/CellTest.java
+/home/kowrishankar/Downloads/gameoflife_andrei/gameoflife/java/gameoflife/src/test/java/bbc/codingtests/gameoflife/life/LifeTest.java

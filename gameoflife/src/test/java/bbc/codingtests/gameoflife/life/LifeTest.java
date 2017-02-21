@@ -13,70 +13,7 @@ import java.util.Collection;
 
 import static org.junit.Assert.*;
 
-@RunWith(Parameterized.class)
 public class LifeTest {
-
-	private String input;
-	private String expectedOutput;
-
-	public LifeTest(String input, String expectedOutput) {
-		this.input = input;
-		this.expectedOutput = expectedOutput;
-	}
-
-	@Parameterized.Parameters
-	public static Collection inputData() {
-		return Arrays.asList( new Object[][] {
-				{		"....*....\n" +
-						"....*....\n" +
-						"....*....\n" +
-						"....*....\n" +
-						"....*....\n" +
-						"....*....\n" +
-						"....*....\n" +
-						"....*....",
-
-						".........\n" +
-						"...***...\n" +
-						"...***...\n" +
-						"...***...\n" +
-						"...***...\n" +
-						"...***...\n" +
-						"...***...\n" +
-						"........."
-				},
-				{
-						"...\n" +
-						"***\n" +
-						"...",
-
-						".*.\n" +
-						".*.\n" +
-						".*."
-				},
-				{
-						"..........\n" +
-						"..........\n" +
-						"****......\n" +
-						"...*......\n" +
-						"...*......",
-
-						"..........\n" +
-						".**.......\n" +
-						".***......\n" +
-						".*.**.....\n" +
-						".........."
-				}
-		});
-	}
-
-	@Test
-	public void testParameterizedInputs() {
-		Life testLife = new LifeImpl();
-		GameState gameState = new GameStateImpl(this.input);
-		GameState evolvedState = testLife.evolve(gameState);
-		assertEquals("The game state after evolve should be different", this.expectedOutput, evolvedState.toString());
-	}
 
 	@Test
 	public void testEmptyGrid() {
@@ -88,7 +25,7 @@ public class LifeTest {
 	}
 
 	@Test
-	public void testScenario0_noLiveCell_returnsNoLiveCells() {
+	public void test_scenario0_noLiveCell_returnsNoLiveCells() {
 		String deadcells = "...\n...\n...";
 		String expectedOutput = "...\n...\n...";
 
@@ -98,7 +35,7 @@ public class LifeTest {
 	}
 
 	@Test
-	public void testScenario1_underpopulation() {
+	public void test_scenario1_underpopulation() {
 		String underPopulationInput = "*.*\n...\n...";
 		String expectedOutput = "...\n...\n...";
 
@@ -108,7 +45,7 @@ public class LifeTest {
 	}
 
 	@Test
-	public void testScenario6_withTwoEvolveCall() {
+	public void test_scenario6_withTwoEvolveCall() {
 		String input = "...\n***\n...";
 		String expectedOutput = ".*.\n.*.\n.*.";
 
@@ -120,15 +57,9 @@ public class LifeTest {
 	}
 
 	@Test
-	public void testNullGameStateImpl() {
+	public void test_nullGameStateImpl() {
 		Life testLife = new LifeImpl();
 		GameState nullState = null;
 		assertEquals("Over Population grid should lead to dead cell", null, testLife.evolve(nullState));
-	}
-
-	@Test
-	public void testShouldAliveCellLive_withLive3Neighbours() {
-		Life life = new LifeImpl();
-
 	}
 }
